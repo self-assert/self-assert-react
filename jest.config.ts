@@ -16,6 +16,7 @@ const config: Config = {
   maxWorkers: "50%",
   rootDir: ".",
   roots: ["<rootDir>/src"],
+  testEnvironment: "jsdom",
   // A path to a module which exports an async function that is triggered once before all test suites
   // globalSetup: undefined,
   // A path to a module which exports an async function that is triggered once after all test suites
