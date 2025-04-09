@@ -1,7 +1,9 @@
 import typescript from "@rollup/plugin-typescript";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
+/** @type {import('rollup').RollupOptions[]} */
 export default [
   {
     input: "src/index.ts",
@@ -17,6 +19,12 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [typescript({ tsconfig: "./tsconfig.build.json" }), resolve(), commonjs()],
+    plugins: [
+      typescript({ tsconfig: "./tsconfig.json", exclude: ["**/__tests__/**/*", "**/*.test.tsx"] }),
+      resolve(),
+      commonjs(),
+      peerDepsExternal(),
+    ],
+    external: ["react", "react-dom"],
   },
 ];
