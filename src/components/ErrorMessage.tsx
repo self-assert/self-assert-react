@@ -1,5 +1,6 @@
 import React from "react";
 import type { DraftAssistant } from "self-assert";
+import { useBrokenRulesDescriptions } from "../hooks";
 
 export interface ErrorMessageProps {
   draftAssistant: DraftAssistant;
@@ -14,14 +15,7 @@ export function ErrorMessage({
   renderErrors,
   as: Wrapper = "div",
 }: ErrorMessageProps) {
-  const [errors, setErrors] = React.useState<string[]>([]);
-
-  React.useEffect(() => {
-    draftAssistant.accept({
-      onFailure: () => setErrors(draftAssistant.brokenRulesDescriptions()),
-      onFailuresReset: () => setErrors([]),
-    });
-  }, [draftAssistant]);
+  const errors = useBrokenRulesDescriptions(draftAssistant);
 
   if (errors.length === 0) return null;
 
