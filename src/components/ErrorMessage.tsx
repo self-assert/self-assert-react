@@ -2,34 +2,31 @@ import React from "react";
 import type { DraftAssistant } from "self-assert";
 import { useBrokenRulesDescriptions } from "../hooks";
 
-export interface ErrorMessageProps {
-  draftAssistant: DraftAssistant;
-  className?: string;
-  renderErrors?: (messages: string[]) => React.ReactNode;
-  as?: React.ElementType;
-}
+const defaultRenderErrorClosure = (descriptions: string[]) => (
+  <ul>
+    {descriptions.map((msg, i) => (
+      <li key={i}>{msg}</li>
+    ))}
+  </ul>
+);
 
-export function ErrorMessage({
+export type ErrorMessageProps<ContainerType extends React.ElementType = "div"> =
+  React.ComponentPropsWithoutRef<ContainerType> & {
+    draftAssistant: DraftAssistant;
+    renderErrors?: (descriptions: string[]) => React.ReactNode;
+    as?: ContainerType;
+  };
+
+export function ErrorMessage<ContainerType extends React.ElementType = "div">({
   draftAssistant,
-  className,
-  renderErrors,
-  as: Wrapper = "div",
-}: ErrorMessageProps) {
-  const errors = useBrokenRulesDescriptions(draftAssistant);
+  renderErrors = defaultRenderErrorClosure,
+  as,
+  ...rest
+}: ErrorMessageProps<ContainerType>) {
+  const Wrapper = as ?? "div";
+  const descriptions = useBrokenRulesDescriptions(draftAssistant);
 
-  if (errors.length === 0) return null;
+  if (descriptions.length === 0) return null;
 
-  return (
-    <Wrapper className={className}>
-      {renderErrors ? (
-        renderErrors(errors)
-      ) : (
-        <ul>
-          {errors.map((msg, i) => (
-            <li key={i}>{msg}</li>
-          ))}
-        </ul>
-      )}
-    </Wrapper>
-  );
+  return <Wrapper {...rest}>{renderErrors(descriptions)}</Wrapper>;
 }
