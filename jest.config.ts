@@ -3,11 +3,12 @@
  * https://jestjs.io/docs/configuration
  */
 import type { Config } from "jest";
-import { createDefaultPreset, pathsToModuleNameMapper, TsConfigCompilerOptionsJson } from "ts-jest";
+import { createDefaultPreset, TsConfigCompilerOptionsJson } from "ts-jest";
 
 import { compilerOptions } from "./tsconfig.json";
 
 const config: Config = {
+  testEnvironment: "jsdom",
   clearMocks: true,
   coverageDirectory: "coverage",
   coverageProvider: "babel",
@@ -16,20 +17,16 @@ const config: Config = {
   maxWorkers: "50%",
   rootDir: ".",
   roots: ["<rootDir>/src"],
-  testEnvironment: "jsdom",
-  // A path to a module which exports an async function that is triggered once before all test suites
-  // globalSetup: undefined,
-  // A path to a module which exports an async function that is triggered once after all test suites
-  // globalTeardown: undefined,
-  // The paths to modules that run some code to configure or set up the testing environment before each test
-  // setupFiles: [],
-  // setupFilesAfterEnv: ["<rootDir>/testing-support/jest.setup.ts"],
-  // The number of seconds after which a test is considered as slow and reported as such in the results.
   slowTestThreshold: 2,
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[tj]s?(x)"],
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" }),
-  ...createDefaultPreset({ tsconfig: { ...(compilerOptions as TsConfigCompilerOptionsJson), noEmit: true } }),
+  ...createDefaultPreset({
+    tsconfig: {
+      ...(compilerOptions as TsConfigCompilerOptionsJson),
+      noEmit: true,
+    },
+  }),
+  
 };
 
 export default config;

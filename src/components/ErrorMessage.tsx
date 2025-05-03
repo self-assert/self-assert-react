@@ -1,20 +1,41 @@
 import React from "react";
-import type { FormCompletionAssistant } from "@self-assert/self-assert";
+import type { DraftAssistant } from "self-assert";
 
-interface ErrorMessageProps {
-  formCompletionAssistant: FormCompletionAssistant<unknown, unknown>;
+export interface ErrorMessageProps {
+  draftAssistant: DraftAssistant;
+  className?: string;
+  renderErrors?: (messages: string[]) => React.ReactNode;
+  as?: React.ElementType;
 }
 
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({ formCompletionAssistant }) => {
-  if (!formCompletionAssistant.hasFailedAssertions()) return null;
+export function ErrorMessage({
+  draftAssistant,
+  className,
+  renderErrors,
+  as: Wrapper = "div",
+}: ErrorMessageProps) {
+  const [errors, setErrors] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    draftAssistant.accept({
+      onFailure: () => setErrors(draftAssistant.brokenRulesDescriptions()),
+      onFailuresReset: () => setErrors([]),
+    });
+  }, [draftAssistant]);
+
+  if (errors.length === 0) return null;
 
   return (
-    <div className="ui bottom attached negative message" role="alert" aria-live="polite">
-      <ul>
-        {formCompletionAssistant.failedAssertionsDescriptions().map((desc, key) => (
-          <li key={key}>{desc}</li>
-        ))}
-      </ul>
-    </div>
+    <Wrapper className={className}>
+      {renderErrors ? (
+        renderErrors(errors)
+      ) : (
+        <ul>
+          {errors.map((msg, i) => (
+            <li key={i}>{msg}</li>
+          ))}
+        </ul>
+      )}
+    </Wrapper>
   );
-};
+}
