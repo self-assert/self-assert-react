@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/self-assert/self-assert-react#readme",
   "peerDependencies": {
-    "@self-assert/self-assert": "^0.1.21",
+    "self-assert": "^1.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
