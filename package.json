@@ -15,10 +15,15 @@
   "files": [
     "dist"
   ],
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rollup -c",
-    "test": "jest",
-    "prepare": "npm run build"
+    "lint": "eslint src/",
+    "prepare": "npm run build",
+    "test": "jest"
   },
   "keywords": [
     "form",
