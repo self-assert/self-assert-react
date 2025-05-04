@@ -16,7 +16,7 @@ A React extension for the [`self-assert`](https://github.com/self-assert/self-as
 
 <div align="center">
 
-![npm version](https://img.shields.io/npm/v/@self-assert/react)
+[![npm version](https://img.shields.io/npm/v/%40self-assert%2Freact)][npm]
 [![License](https://img.shields.io/badge/license-MIT-green)][license]
 [![CI](https://github.com/self-assert/self-assert-react/actions/workflows/ci.yml/badge.svg)](https://github.com/self-assert/self-assert-react/actions/workflows/ci.yml)
 
@@ -36,3 +36,4 @@ npm install @self-assert/react
 
 [repo]: https://github.com/self-assert/self-assert-react
 [license]: https://github.com/self-assert/self-assert-react/blob/main/LICENSE
+[npm]: https://www.npmjs.com/package/@self-assert/react
