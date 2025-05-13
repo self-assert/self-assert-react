@@ -4,23 +4,15 @@
 
 <div align="center">
 
-[![self-assert logo](https://avatars.githubusercontent.com/u/205992123?s=100)][repo]
+[![License](https://img.shields.io/badge/license-MIT-green)][license]
 
 </div>
 
 A React extension for the [`self-assert`](https://github.com/self-assert/self-assert) library.
 
 > [!WARNING]
-> This project is in its early stages. Documentation will be added in the
-> coming days.
-
-<div align="center">
-
-[![npm version](https://img.shields.io/npm/v/%40self-assert%2Freact)][npm]
-[![License](https://img.shields.io/badge/license-MIT-green)][license]
-[![CI](https://github.com/self-assert/self-assert-react/actions/workflows/ci.yml/badge.svg)](https://github.com/self-assert/self-assert-react/actions/workflows/ci.yml)
-
-</div>
+> This project was moved to [`packages/react`](https://github.com/self-assert/self-assert/tree/main/packages/react)
+> in the [new monorepo](https://github.com/self-assert/self-assert).
 
 ## Installation
 
@@ -34,6 +26,5 @@ npm install @self-assert/react
 
 [MIT][license]
 
-[repo]: https://github.com/self-assert/self-assert-react
+[org]: https://github.com/self-assert
 [license]: https://github.com/self-assert/self-assert-react/blob/main/LICENSE
-[npm]: https://www.npmjs.com/package/@self-assert/react
